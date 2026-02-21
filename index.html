@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MySynth</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- LEFT: Synth Panel -->
+    <div class="panel synth-panel">
+      <h1 class="title">MySynth</h1>
+
+      <!-- Oscillators -->
+      <section class="section">
+        <h2>Oscillators</h2>
+        <div class="osc-row">
+          <div class="osc-block">
+            <label>OSC 1</label>
+            <select id="osc1-type">
+              <option value="sawtooth" selected>Saw</option>
+              <option value="square">Square</option>
+              <option value="sine">Sine</option>
+              <option value="triangle">Triangle</option>
+            </select>
+            <select id="osc1-octave">
+              <option value="-2">-2 Oct</option>
+              <option value="-1">-1 Oct</option>
+              <option value="0" selected>0 Oct</option>
+              <option value="1">+1 Oct</option>
+              <option value="2">+2 Oct</option>
+            </select>
+            <div id="knob-osc1level"></div>
+          </div>
+          <div class="osc-block">
+            <label>OSC 2</label>
+            <select id="osc2-type">
+              <option value="sawtooth" selected>Saw</option>
+              <option value="square">Square</option>
+              <option value="sine">Sine</option>
+              <option value="triangle">Triangle</option>
+            </select>
+            <select id="osc2-octave">
+              <option value="-2">-2 Oct</option>
+              <option value="-1">-1 Oct</option>
+              <option value="0" selected>0 Oct</option>
+              <option value="1">+1 Oct</option>
+              <option value="2">+2 Oct</option>
+            </select>
+            <select id="osc2-detune">
+              <option value="0">0 ct</option>
+              <option value="7" selected>+7 ct</option>
+              <option value="12">+12 ct</option>
+              <option value="-7">-7 ct</option>
+              <option value="-12">-12 ct</option>
+            </select>
+            <div id="knob-osc2level"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ADSR -->
+      <section class="section">
+        <h2>Envelope</h2>
+        <div class="knobs-row">
+          <div id="knob-attack"></div>
+          <div id="knob-decay"></div>
+          <div id="knob-sustain"></div>
+          <div id="knob-release"></div>
+        </div>
+      </section>
+
+      <!-- Filter -->
+      <section class="section">
+        <h2>Filter</h2>
+        <select id="filter-type">
+          <option value="lowpass" selected>Lowpass</option>
+          <option value="highpass">Highpass</option>
+          <option value="bandpass">Bandpass</option>
+        </select>
+        <div class="knobs-row">
+          <div id="knob-cutoff"></div>
+          <div id="knob-resonance"></div>
+        </div>
+      </section>
+
+      <!-- Effects -->
+      <section class="section">
+        <h2>Effects</h2>
+        <div class="knobs-row">
+          <div id="knob-reverb"></div>
+          <div id="knob-delay"></div>
+          <div id="knob-feedback"></div>
+        </div>
+      </section>
+
+      <!-- Master -->
+      <section class="section">
+        <h2>Master</h2>
+        <div class="knobs-row">
+          <div id="knob-volume"></div>
+        </div>
+      </section>
+
+      <!-- Keyboard -->
+      <section class="section keyboard-section">
+        <h2>Keyboard</h2>
+        <div id="keyboard-container"></div>
+      </section>
+    </div>
+
+    <!-- RIGHT: MIDI Inspector -->
+    <div class="panel midi-panel">
+      <h2>MIDI Inspector</h2>
+
+      <div class="midi-header">
+        <span id="midi-status" class="midi-status disconnected">MIDI: Not Available</span>
+        <span id="midi-activity" class="midi-activity"></span>
+      </div>
+
+      <div class="midi-device-row">
+        <label>Device:</label>
+        <select id="midi-device-select">
+          <option value="">-- No MIDI --</option>
+        </select>
+      </div>
+
+      <div class="midi-log-container">
+        <div class="midi-log-header">
+          <span>Message Log</span>
+          <button id="clear-log">Clear</button>
+        </div>
+        <div class="midi-log-scroll">
+          <table class="midi-log-table">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Type</th>
+                <th>Ch</th>
+                <th>Hex</th>
+                <th>Decoded</th>
+              </tr>
+            </thead>
+            <tbody id="midi-log-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

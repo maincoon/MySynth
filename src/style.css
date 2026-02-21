@@ -1,0 +1,299 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0d0d1a;
+  --panel: #1a1a2e;
+  --panel2: #16213e;
+  --accent: #00d4ff;
+  --green: #00ff88;
+  --purple: #7b2fff;
+  --text: #c8d0e0;
+  --text-dim: #6a7280;
+  --border: #2a2a4a;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Courier New', monospace;
+  min-height: 100vh;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  min-height: 100vh;
+  gap: 0;
+}
+
+.panel {
+  padding: 1.5rem;
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+}
+
+.synth-panel { background: var(--panel); }
+.midi-panel  { background: var(--panel2); }
+
+.title {
+  font-family: 'Orbitron', monospace;
+  font-size: 2.5rem;
+  color: var(--accent);
+  text-shadow: 0 0 20px var(--accent);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.1em;
+}
+
+.section {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.section h2 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.osc-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.osc-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.osc-block label {
+  font-size: 0.7rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+select {
+  background: #0d0d1a;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.3rem 0.5rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  width: 100%;
+}
+select:focus { outline: 1px solid var(--accent); }
+
+.knobs-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.knob-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 60px;
+}
+
+.knob-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.knob-value {
+  font-size: 0.65rem;
+  color: var(--accent);
+}
+
+/* Style range inputs as knobs */
+input[type=range].knob {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle at center, #2a2a4a 60%, #1a1a2e);
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  outline: none;
+  cursor: pointer;
+  writing-mode: vertical-lr;
+  direction: rtl;
+}
+
+input[type=range].knob::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--accent);
+}
+
+input[type=range].knob::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  border: none;
+}
+
+/* Keyboard */
+.keyboard-section { overflow-x: auto; }
+
+.keyboard-wrapper {
+  position: relative;
+  display: flex;
+  height: 100px;
+  user-select: none;
+  min-width: 600px;
+}
+
+.key {
+  cursor: pointer;
+  border-radius: 0 0 4px 4px;
+  transition: background 0.05s;
+}
+
+.white-key {
+  background: linear-gradient(to bottom, #e8e8f0, #fff);
+  border: 1px solid #555;
+  border-top: none;
+  width: 28px;
+  height: 100px;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.white-key:hover { background: #d0f0ff; }
+.white-key.active { background: var(--green); box-shadow: 0 0 10px var(--green); }
+
+.black-key {
+  background: linear-gradient(to bottom, #222, #444);
+  border: 1px solid #000;
+  width: 18px;
+  height: 65px;
+  z-index: 2;
+  margin-left: -9px;
+  margin-right: -9px;
+  flex-shrink: 0;
+}
+
+.black-key:hover { background: #334; }
+.black-key.active { background: var(--green); box-shadow: 0 0 8px var(--green); }
+
+/* MIDI Panel */
+.midi-panel h2 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--purple);
+  margin-bottom: 1rem;
+}
+
+.midi-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.midi-status {
+  font-size: 0.8rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+.midi-status.connected    { background: rgba(0,255,136,0.15); color: var(--green); border: 1px solid var(--green); }
+.midi-status.disconnected { background: rgba(255,60,60,0.1);  color: #ff6060;      border: 1px solid #ff4040; }
+
+.midi-activity {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #333;
+  transition: background 0.05s;
+}
+.midi-activity.active { background: var(--green); box-shadow: 0 0 8px var(--green); }
+
+.midi-device-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+.midi-device-row select { flex: 1; }
+
+.midi-log-container {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.midi-log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0.75rem;
+  background: rgba(0,0,0,0.4);
+  font-size: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.midi-log-header button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 0.1rem 0.5rem;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.7rem;
+}
+.midi-log-header button:hover { border-color: var(--accent); color: var(--accent); }
+
+.midi-log-scroll {
+  max-height: 400px;
+  overflow-y: auto;
+  font-size: 0.7rem;
+}
+
+.midi-log-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.midi-log-table th {
+  position: sticky;
+  top: 0;
+  background: #111122;
+  color: var(--text-dim);
+  text-align: left;
+  padding: 0.3rem 0.4rem;
+  font-weight: normal;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border);
+}
+
+.midi-log-table td {
+  padding: 0.2rem 0.4rem;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  font-family: monospace;
+}
+
+.midi-log-table tr.noteOn  td { color: var(--green); }
+.midi-log-table tr.noteOff td { color: #ff6060; }
+.midi-log-table tr.controlChange td { color: #6090ff; }
+.midi-log-table tr.pitchBend td { color: var(--purple); }
