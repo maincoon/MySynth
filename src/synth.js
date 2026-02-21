@@ -1,3 +1,5 @@
+const MIN_GAIN_VALUE = 0.0001; // Avoid Web Audio API issues with ramping to exactly 0
+
 export class Synth {
   constructor() {
     this.audioContext = null;
@@ -192,7 +194,7 @@ export class Synth {
       const rel = this.params.release;
       const current = voice.voiceGain.gain.value;
       voice.voiceGain.gain.setValueAtTime(current, now);
-      voice.voiceGain.gain.linearRampToValueAtTime(0.0001, now + rel);
+      voice.voiceGain.gain.linearRampToValueAtTime(MIN_GAIN_VALUE, now + rel);
       voice.osc1.stop(now + rel + 0.05);
       voice.osc2.stop(now + rel + 0.05);
     }

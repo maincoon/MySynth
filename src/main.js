@@ -4,6 +4,8 @@ import { OnScreenKeyboard } from './keyboard.js';
 import { Knob } from './knob.js';
 import './style.css';
 
+const MAX_LOG_ROWS = 100; // Keep in sync with MidiInspector._log limit
+
 let synth = new Synth();
 let synthInitialized = false;
 const midi = new MidiInspector();
@@ -147,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tr.innerHTML = `<td>${time}</td><td>${row.type}</td><td>${row.channel}</td><td>${hex}</td><td>${decoded}</td>`;
     midiLogBody.appendChild(tr);
     // Keep max 100 rows displayed
-    while (midiLogBody.rows.length > 100) midiLogBody.deleteRow(0);
+    while (midiLogBody.rows.length > MAX_LOG_ROWS) midiLogBody.deleteRow(0);
     midiLogBody.parentElement.scrollTop = midiLogBody.parentElement.scrollHeight;
   }
 
